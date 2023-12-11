@@ -188,7 +188,7 @@ void PID_lib::pid_speed(double target_, double kp_,double ki_,double kd_, double
   //pwm saturasi end
   
 //   //motor start
-//   pwm = fabs(pwmLebih);
+  pwm = fabs(pwmLebih);
 //   //motor end
 
 // pid cek sample time
