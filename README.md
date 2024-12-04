@@ -131,6 +131,6 @@ Kontribusi sangat diapresiasi! Ikuti langkah berikut untuk berkontribusi:
 ## 📧 Kontak  
 
 Jika Anda memiliki pertanyaan atau masalah dengan kode ini, silakan hubungi:  
-📬 Email: [your-email@example.com](mailto:your-email@example.com)  
+📬 Email: [kikifachrizi235@gmail.com](mailto:kikifachrizi235@gmail.com)  
 
 ---
