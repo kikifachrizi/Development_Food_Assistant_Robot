@@ -1,6 +1,6 @@
 # T.I.F.A - Tel-U Interactive Food Assistant 🚚🍱  
 
-![Code Banner](./documentation/umum/TIFA_TelU_Intelligence_Food_Assistant.png)
+![Code Banner](./documentation/umum/TIFA.png)
 
 *Gambar di atas adalah placeholder, ganti dengan gambar terkait proyek.*
 
