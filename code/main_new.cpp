@@ -40,7 +40,7 @@ float mes_rpm[4];
 #define ENCODER_A_1 38
 #define ENCODER_B_1 39
 
-#define ENCODER_A_2 31
+#define ENCODER_A_2 33
 #define ENCODER_B_2 30
 
 #define ENCODER_A_3 36
@@ -100,23 +100,39 @@ void pidTask(){
     if(pidFlag){
       pidFlag = false;
       // Vx = 0;Vy = 0;Vth = -3;
-
-      // rise time 0.54 , settling time 0.96
-      kp[0] = 1.121;
-      ki[0] = 14.4345;
+      // rise time .5 , settling time 1
+      kp[0] = 1.0726;
+      ki[0] = 15.9984;
       kd[0] = 0;
 
-      kp[1] = 1.0083;
-      ki[1] = 14.885;
+      kp[1] = 1.3723;
+      ki[1] = 17.8826;
       kd[1] = 0;
 
-      kp[2] = 0.87788;
-      ki[2] = 14.4707;
+      kp[2] = 0;
+      ki[2] = 20.755;
       kd[2] = 0;
 
-      kp[3] = 1.0735;
-      ki[3] = 12.82;
+      kp[3] = 0;
+      ki[3] = 9.7198;
       kd[3] = 0;
+
+      // rise time 0.54 , settling time 0.96
+      // kp[0] = 1.121;
+      // ki[0] = 14.4345;
+      // kd[0] = 0;
+
+      // kp[1] = 1.0083;
+      // ki[1] = 14.885;
+      // kd[1] = 0;
+
+      // kp[2] = 0.87788;
+      // ki[2] = 14.4707;
+      // kd[2] = 0;
+
+      // kp[3] = 1.0735;
+      // ki[3] = 12.82;
+      // kd[3] = 0;
 
       rpm[0] = encoder_value_1;
       rpm[1] = encoder_value_2;
@@ -164,22 +180,22 @@ void pidTask(){
         encoder_value_4 = 0;
       }
 
-      Serial.print(out[0]);
-      Serial.print(";");
-      Serial.print(out[1]);
-      Serial.print(";");
-      Serial.print(out[2]);
-      Serial.print(";");
-      Serial.print(out[3]);
-      Serial.print(";");
-      Serial.print(mes_rpm[0]);
-      Serial.print(";");
-      Serial.print(mes_rpm[1]);
-      Serial.print(";");
-      Serial.print(mes_rpm[2]);
-      Serial.print(";");
-      Serial.print(mes_rpm[3]);
-      Serial.println(";");
+      pc2.print(out[0]);
+      pc2.print(";");
+      pc2.print(out[1]);
+      pc2.print(";");
+      pc2.print(out[2]);
+      pc2.print(";");
+      pc2.print(out[3]);
+      pc2.print(";");
+      pc2.print(mes_rpm[0]);
+      pc2.print(";");
+      pc2.print(mes_rpm[1]);
+      pc2.print(";");
+      pc2.print(mes_rpm[2]);
+      pc2.print(";");
+      pc2.print(mes_rpm[3]);
+      pc2.println(";");
     }
   }
 }
@@ -318,28 +334,28 @@ void wheel_odom(){
     X += (dx_global*-scale);
     Y += (dy_global*-scale); //berapa dx pulse per 1m
 
-    pc2.print(accelX);
-    pc2.print(";");
-    pc2.print(accelY);
-    pc2.print(";");
-    pc2.print(accelZ);
-    pc2.print(";");
-    pc2.print(gyroX);
-    pc2.print(";");
-    pc2.print(gyroY);
-    pc2.print(";");
-    pc2.print(gyroZ);
-    pc2.print(";");
-    pc2.print(angleX);
-    pc2.print(";");
-    pc2.print(angleY);
-    pc2.print(";");
-    pc2.print(thetta);
-    pc2.print(";");
-    pc2.print(X/100);
-    pc2.print(";");
-    pc2.print(Y/100);
-    pc2.println(";");
+    Serial.print(accelX);
+    Serial.print(";");
+    Serial.print(accelY);
+    Serial.print(";");
+    Serial.print(accelZ);
+    Serial.print(";");
+    Serial.print(gyroX);
+    Serial.print(";");
+    Serial.print(gyroY);
+    Serial.print(";");
+    Serial.print(gyroZ);
+    Serial.print(";");
+    Serial.print(angleX);
+    Serial.print(";");
+    Serial.print(angleY);
+    Serial.print(";");
+    Serial.print(thetta);
+    Serial.print(";");
+    Serial.print(X/100);
+    Serial.print(";");
+    Serial.print(Y/100);
+    Serial.println(";");
   }
 }
 
@@ -447,9 +463,9 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(ENCODER_A_5), encoder_isr_5, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENCODER_A_6), encoder_isr_6, CHANGE);
 
-  threads.addThread(motorTask,2);
-  threads.addThread(pidTask,2);
-  threads.addThread(pcComm,2);
+  threads.addThread(motorTask,3);
+  threads.addThread(pidTask,3);
+  threads.addThread(pcComm,3);
   threads.addThread(odom,1);
   threads.addThread(wheel_odom,2);
 
@@ -496,4 +512,3 @@ void parseString(String data) {
     }
   }
 }
-
